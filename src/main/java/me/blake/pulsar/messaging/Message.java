@@ -38,6 +38,10 @@ public class Message {
         return new Message(messageList.getOrDefault(key, List.of(Text.colorize("&cCould not find message " + key))));
     }
 
+    public static Message getOrDefault(String key, Message defaultMessage) {
+        return new Message(messageList.getOrDefault(key, defaultMessage.asList()));
+    }
+
     public static void loadMessages(YamlConfiguration configuration) {
         for (String key : configuration.getKeys(false)) {
             if (configuration.isList(key))
@@ -103,16 +107,20 @@ public class Message {
     }
 
     @Getter
-    @AllArgsConstructor
     public static class Placeholder {
-        private final String name;
-        private final String value;
+        private String name;
+        private String value;
+
+        public Placeholder(String name, String value) {
+            this.name = name;
+            this.value = value;
+        }
     }
 
     @Getter
     @AllArgsConstructor
     public static class PlaceholderList {
-        private final String name;
-        private final List<String> value;
+        private String name;
+        private List<String> value;
     }
 }

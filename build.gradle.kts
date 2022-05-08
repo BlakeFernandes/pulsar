@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.6.21"
+    `java-library`
     id("maven-publish")
     application
 }
@@ -33,6 +34,11 @@ dependencies {
     implementation("de.tr7zw:item-nbt-api-plugin:2.9.2")
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 tasks.test {
     useJUnitPlatform()
 }
@@ -43,4 +49,16 @@ tasks.withType<KotlinCompile> {
 
 application {
     mainClass.set("MainKt")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "me.blake.pulsar"
+            artifactId = "Pulsar"
+            version = "1.0-SNAPSHOT"
+
+            from(components["java"])
+        }
+    }
 }

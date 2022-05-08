@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class ComplexItemReader {
-
     public static final ComplexItemReader DEFAULT = new ComplexItemReader();
 
     public final ComplexItemBuilder read(ConfigurationSection config) {

@@ -10,27 +10,29 @@ class FileManager(
 ) {
     private val configs = HashMap<String, Config>()
 
-    fun getConfig(name: String): Config? {
-        if (!configs.containsKey(name)) configs[name] = Config(name)
-        return configs[name]
+    fun getConfig(name: String): Config {
+        return configs.getOrDefault(name, Config(name));
     }
 
-    fun saveConfig(name: String): Config? {
-        return getConfig(name)?.save()
+    fun saveConfig(name: String): Config {
+        return getConfig(name).save()
     }
 
-    fun reloadConfig(name: String): Config? {
-        return getConfig(name)?.reload()
+    fun reloadConfig(name: String): Config {
+        return getConfig(name).reload()
     }
 
-    inner class Config(private val name: String) {
-        private var file: File = File(plugin.dataFolder, name)
-        private var config: YamlConfiguration = YamlConfiguration.loadConfiguration(file)
+    inner class Config(private val _name: String): YamlConfiguration() {
+        private var file: File = File(plugin.dataFolder, _name)
+
+        init {
+            loadConfiguration(file)
+        }
 
         fun save(): Config {
             try {
-                if (file.exists()) copyDefaults(true)
-                if (config.getConfigurationSection("")?.getKeys(true)?.size != 0) config.save(file)
+                copyDefaults(true)
+                save(file)
             } catch (ex: IOException) {
                 ex.printStackTrace()
             }
@@ -38,22 +40,19 @@ class FileManager(
         }
 
         fun saveDefaultConfig(): Config {
-            plugin.saveResource(name, false)
+            plugin.saveResource(_name, false)
             return this
         }
 
         fun reload(): Config {
-            this.config = YamlConfiguration.loadConfiguration(file)
+            val configStream = InputStreamReader(plugin.getResource(this._name), "UTF8")
+            val defaultConfig = loadConfiguration(configStream)
+            setDefaults(defaultConfig)
             return this
         }
 
         fun copyDefaults(force: Boolean): Config {
-            config.options().copyDefaults(force)
-            return this
-        }
-
-        operator fun set(key: String, value: Any?): Config {
-            config.set(key, value)
+            options().copyDefaults(force)
             return this
         }
     }
