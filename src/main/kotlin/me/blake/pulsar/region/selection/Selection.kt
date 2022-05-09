@@ -3,31 +3,34 @@ package me.blake.pulsar.region.selection
 import org.bukkit.Location
 
 class Selection(
-    private var location1: Location? = null,
-    private var location2: Location? = null
+    var cuboid: Cuboid
 ) {
     fun setLocation(type: Type, location: Location) {
         if (type == Type.FIRST_POSITION) {
-            location1 = location
+            Cuboid.Builder().location1(location).location2(cuboid.location2)
         } else {
-            location2 = location
+            Cuboid.Builder().location1(cuboid.location1).location2(location)
         }
     }
 
     fun getLocation(type: Type): Location? {
         return if (type == Type.FIRST_POSITION) {
-            location1
+            cuboid.location1
         } else {
-            location2
+            cuboid.location2
         }
     }
 
     fun hasLocation(): Boolean {
-        return location1 != null && location2 != null
+        return cuboid.location1 != null && cuboid.location2 != null
     }
 
     fun equals(type: Type, location: Location): Boolean {
         return getLocation(type)?.equals(location) ?: false
+    }
+
+    fun contains(location: Location): Boolean {
+        return cuboid.contains(location)
     }
 
     enum class Type {

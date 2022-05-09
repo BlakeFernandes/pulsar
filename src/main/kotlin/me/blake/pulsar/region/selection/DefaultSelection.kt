@@ -7,7 +7,7 @@ class DefaultSelection {
     private var selections: HashMap<Player, Selection> = HashMap<Player, Selection>()
 
     fun addLocation(player: Player, loccation: Location, type: Selection.Type) {
-        val selection = getSelectionLocation(player) ?: Selection()
+        val selection = getSelectionLocation(player) ?: Selection(Cuboid.Builder().build())
         selection.setLocation(type, loccation)
         selections[player] = selection
     }
