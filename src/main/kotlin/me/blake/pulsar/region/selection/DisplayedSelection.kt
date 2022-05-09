@@ -15,7 +15,7 @@ import org.bukkit.util.Vector
 
 
 class DisplayedSelection(
-    private val selection: Selection,
+    val selection: Selection,
     private val itemStack: ItemStack,
     private val particle: Particle = Particle.REDSTONE,
     private val redrawInterval: Long = 10L
