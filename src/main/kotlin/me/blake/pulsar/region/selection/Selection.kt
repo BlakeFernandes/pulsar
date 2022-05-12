@@ -6,10 +6,10 @@ class Selection(
     var cuboid: Cuboid
 ) {
     fun setLocation(type: Type, location: Location) {
-        if (type == Type.FIRST_POSITION) {
-            Cuboid.Builder().location1(location).location2(cuboid.location2)
+        cuboid = if (type == Type.FIRST_POSITION) {
+            Cuboid.Builder().location1(location).location2(cuboid.location2).build()
         } else {
-            Cuboid.Builder().location1(cuboid.location1).location2(location)
+            Cuboid.Builder().location1(cuboid.location1).location2(location).build()
         }
     }
 

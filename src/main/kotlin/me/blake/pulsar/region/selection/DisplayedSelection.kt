@@ -11,7 +11,6 @@ import org.bukkit.Particle
 import org.bukkit.event.block.Action
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
-import org.bukkit.util.Vector
 
 
 class DisplayedSelection(
@@ -77,8 +76,8 @@ class DisplayedSelection(
         val loc1: Location? = selection.getLocation(Selection.Type.FIRST_POSITION)?.clone()
         val loc2: Location? = selection.getLocation(Selection.Type.SECOND_POSITION)?.clone()
 
-        loc1?.add(0.5,0.5,0.5);
-        loc2?.add(0.5,0.5,0.5);
+        loc1?.add(0.5,1.2,0.5);
+        loc2?.add(0.5,1.2,0.5);
 
         if (loc2 != null) {
             if (loc1 == null) {
