@@ -1,14 +1,15 @@
-package me.blake.pulsar.region.selection
+package me.blake.pulsar.region
 
 import org.bukkit.Location
 
-class Cuboid private constructor(
-    val location1: Location?,
-    val location2: Location?
+class Cuboid constructor(
+    val location1: Location? = null,
+    val location2: Location? = null
 ) {
     data class Builder(
         private var location1: Location? = null,
-        private var location2: Location? = null) {
+        private var location2: Location? = null
+    ) {
         fun location1(location1: Location?) = apply { this.location1 = location1 }
         fun location2(location2: Location?) = apply { this.location2 = location2 }
         fun build() = Cuboid(location1, location2)
@@ -21,5 +22,9 @@ class Cuboid private constructor(
 
     operator fun contains(l: Location): Boolean {
         return if (location1?.world?.name != l.world!!.name) false else this.contains(l.x, l.y, l.z)
+    }
+
+    fun clone(): Cuboid {
+        return Cuboid(location1, location2)
     }
 }

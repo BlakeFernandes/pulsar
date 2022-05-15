@@ -1,14 +1,15 @@
 package me.blake.pulsar.region.selection
 
+import me.blake.pulsar.region.Cuboid
 import org.bukkit.Location
 import org.bukkit.entity.Player
 
-class DefaultSelection {
+abstract class AbstractListSelection(
     private var selections: HashMap<Player, Selection> = HashMap<Player, Selection>()
-
-    fun addLocation(player: Player, loccation: Location, type: Selection.Type) {
+) {
+    fun addLocation(player: Player, location: Location, type: Selection.Type) {
         val selection = getSelectionLocation(player) ?: Selection(Cuboid.Builder().build())
-        selection.setLocation(type, loccation)
+        selection.setLocation(type, location)
         selections[player] = selection
     }
 
