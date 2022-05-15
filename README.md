@@ -1,4 +1,4 @@
-![](https://i.imgur.com/zdjT486.png "Banner")
+![](https://i.imgur.com/UKaSoPC.png "Banner")
 
 # Pulsar
 Pulsar is an uncompleted general purpose toolkit I use for all my spigot plugins. 
