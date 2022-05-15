@@ -1,11 +1,12 @@
 package me.blake.pulsar.region.selection
 
+import me.blake.pulsar.region.Cuboid
 import org.bukkit.Location
 
 class Selection(
-    var cuboid: Cuboid
+    private var cuboid: Cuboid
 ) {
-    fun setLocation(type: Type, location: Location) {
+    fun setLocation(type: Type, location: Location?) {
         cuboid = if (type == Type.FIRST_POSITION) {
             Cuboid.Builder().location1(location).location2(cuboid.location2).build()
         } else {
@@ -31,6 +32,10 @@ class Selection(
 
     fun contains(location: Location): Boolean {
         return cuboid.contains(location)
+    }
+
+    fun clone(): Selection {
+        return Selection(cuboid.clone())
     }
 
     enum class Type {
