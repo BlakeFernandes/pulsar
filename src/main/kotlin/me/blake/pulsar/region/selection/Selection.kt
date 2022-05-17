@@ -38,6 +38,10 @@ class Selection(
         return Selection(cuboid.clone())
     }
 
+    override fun toString(): String {
+        return cuboid.toString()
+    }
+
     enum class Type {
         FIRST_POSITION,
         SECOND_POSITION

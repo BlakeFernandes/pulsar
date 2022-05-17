@@ -1,7 +1,6 @@
 package me.blake.pulsar.actions.impl
 
 import me.blake.pulsar.actions.Action
-import me.blake.pulsar.actions.ActionController
 import me.blake.pulsar.messaging.Message
 import me.blake.pulsar.messaging.Message.Placeholder
 import me.lucko.helper.text3.Text
