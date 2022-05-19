@@ -2,7 +2,9 @@ package me.blake.pulsar.actions
 
 import me.blake.pulsar.actions.impl.CommandAction
 import me.blake.pulsar.actions.impl.MessageAction
+import me.blake.pulsar.actions.impl.SoundAction
 import me.blake.pulsar.actions.impl.TitleAction
+import me.blake.pulsar.actions.controller.ActionController
 import me.blake.pulsar.messaging.Message.Placeholder
 import org.apache.commons.lang.StringUtils
 import org.bukkit.configuration.ConfigurationSection
@@ -57,6 +59,7 @@ abstract class Action(
                 "MESSAGE" -> MessageAction(actionData)
                 "COMMAND" -> CommandAction(actionData)
                 "TITLE" -> TitleAction.parse(actionData)
+                "SOUND" -> SoundAction.parse(actionData)
                 else -> null
             }
         }

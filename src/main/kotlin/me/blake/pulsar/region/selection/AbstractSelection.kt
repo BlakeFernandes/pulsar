@@ -27,4 +27,8 @@ abstract class AbstractSelection(
     fun isSimilar(type: Selection.Type, location: Location): Boolean {
         return selection.getLocation(type)?.equals(location) ?: false
     }
+
+    fun clone(): Selection {
+        return Selection(selection.cuboid.clone())
+    }
 }

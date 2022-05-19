@@ -4,7 +4,7 @@ import me.blake.pulsar.region.Cuboid
 import org.bukkit.Location
 
 class Selection(
-    private var cuboid: Cuboid
+    var cuboid: Cuboid
 ) {
     fun setLocation(type: Type, location: Location?) {
         cuboid = if (type == Type.FIRST_POSITION) {
@@ -28,10 +28,6 @@ class Selection(
 
     fun equals(type: Type, location: Location): Boolean {
         return getLocation(type)?.equals(location) ?: false
-    }
-
-    fun contains(location: Location): Boolean {
-        return cuboid.contains(location)
     }
 
     fun clone(): Selection {

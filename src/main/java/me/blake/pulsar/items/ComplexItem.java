@@ -6,6 +6,7 @@ import de.tr7zw.nbtapi.NBTContainer;
 import de.tr7zw.nbtapi.NBTItem;
 import lombok.Getter;
 import lombok.Setter;
+import me.blake.pulsar.items.builder.ComplexItemBuilder;
 import me.lucko.helper.item.ItemStackBuilder;
 import me.lucko.helper.menu.Item;
 import org.bukkit.Material;
@@ -35,6 +36,10 @@ public class ComplexItem implements Cloneable {
                 .apply(b -> meta.apply(b))
                 .name(name)
                 .lore(lore);
+    }
+
+    public ComplexItemBuilder getComplexItemBuilder() {
+        return ComplexItemBuilder.of(this);
     }
 
     public ItemStack buildItemStack() {

@@ -10,7 +10,7 @@ class TitleAction(
     private val title: String = "",
     private val subtitle: String = "",
     private val fadeIn: Int = 0,
-    private val stay: Int = 0,
+    private val stay: Int = 10,
     private val fadeOut: Int = 0
 ): Action() {
     override fun execute(player: Player, vararg placeholders: Placeholder) {
@@ -38,10 +38,10 @@ class TitleAction(
             val split = action.split(";")
             return TitleAction(
                 split[0],
-                split[1],
-                split[2].toInt(),
-                split[3].toInt(),
-                split[4].toInt()
+                split.getOrElse(1) { "" },
+                split.getOrElse(2) { 0 } as Int,
+                split.getOrElse(3) { 10 } as Int,
+                split.getOrElse(4) { 0 } as Int
             )
         }
     }

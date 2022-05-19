@@ -25,6 +25,17 @@ class Cuboid constructor(
         }
     }
 
+    fun center(): Location? {
+        if (location1 == null && location2 == null) return null;
+        if (location2 == null) return location1;
+        if (location1 == null) return location2;
+
+        val x = (location1.x + location2.x) / 2
+        val y = (location1.y + location2.y) / 2
+        val z = (location1.z + location2.z) / 2
+        return Location(location1.world, x, y, z)
+    }
+
     private fun contains(x: Double, y: Double, z: Double): Boolean {
         return if (location1 == null || location2 == null) false
         else x in location1.x .. location2.x && y >= location1.y && y <= location2.y && z >= location1.z && z <= location2.z
