@@ -2,12 +2,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.6.21"
-    `java-library`
+    id("java-library")
     id("maven-publish")
-    application
+    id("application")
 }
 
-group = "me.blake.pulsar"
+group = "com.github.blakefernandes"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -39,8 +39,12 @@ java {
     withSourcesJar()
 }
 
-tasks.test {
-    useJUnitPlatform()
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
+    }
 }
 
 tasks.withType<KotlinCompile> {
@@ -49,16 +53,4 @@ tasks.withType<KotlinCompile> {
 
 application {
     mainClass.set("MainKt")
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            groupId = "me.blake.pulsar"
-            artifactId = "Pulsar"
-            version = "1.0-SNAPSHOT"
-
-            from(components["java"])
-        }
-    }
 }
