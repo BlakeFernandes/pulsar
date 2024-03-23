@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+//import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.6.21"
@@ -7,8 +7,8 @@ plugins {
     id("application")
 }
 
-group = "com.github.blakefernandes"
-version = "1.0-SNAPSHOT"
+group = "com.github.BlakeFernandes"
+version = "1.0.3"
 
 repositories {
     mavenCentral()
@@ -53,9 +53,9 @@ java {
     }
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "17"
-}
+//tasks.withType<KotlinCompile> {
+//    kotlinOptions.jvmTarget = "17"
+//}
 
 application {
     mainClass.set("MainKt")

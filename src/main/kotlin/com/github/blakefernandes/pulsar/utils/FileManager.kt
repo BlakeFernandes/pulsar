@@ -31,7 +31,7 @@ class FileManager(
 
         fun save(): Config {
             try {
-                copyDefaults(true)
+                copyDefaults(false)
                 save(file)
             } catch (ex: IOException) {
                 ex.printStackTrace()
